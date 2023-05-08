@@ -65,7 +65,7 @@ class Program
             Console.WriteLine("Sort by A: title, B: author, C: ISBN?");
             response = Console.ReadLine().ToLower();
 
-            /* Old sorting attempt
+
 
             //-------------------------------------------------------------------------
             //I am trying to sort the LINQ query at the end based on the user response. 
@@ -88,34 +88,14 @@ class Program
                 continue;
             }
 
-            */
+
 
             //Search here
-            var searchResults = from book in bookList
-                                //orderby sortby descending //Old sorting attempt
-                                where searchby(book) 
+            var searchResults = from book in bookList             
+                                where searchby(book)
+                                orderby sortby(book) ascending
                                 select book;
 
-            //-------------------------------------------------------------------------
-            //Sort search result
-            //-------------------------------------------------------------------------
-            if (response == "a")
-            {
-                searchResults = searchResults.OrderBy(c => c.title);
-            }
-            else if (response == "b")
-            {
-                searchResults = searchResults.OrderBy(c => c.author);
-            }
-            else if (response == "c")
-            {
-                searchResults = searchResults.OrderBy(c => c.isbn);
-            }
-            else
-            {
-                Console.WriteLine("Please select a valid option!");
-                continue;
-            }
 
             //Print title of books in search
             foreach (Book book in searchResults)
